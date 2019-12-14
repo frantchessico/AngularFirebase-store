@@ -1,0 +1,63 @@
+
+<div class="row">
+    <div class="col-md-6">
+      <h2>Edit product</h2>
+    </div>
+    <div class="col-md-6 text-right mt-2">
+      <a routerLink="/products" ><i class="fa fa-home"></i> Back to List</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+     <form #f="ngForm" (ngSubmit)="updateProduct(f)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input #title="ngModel" [(ngModel)]="product.title" id="title" type="text"
+        name="title"
+        class="form-control" required minlength="3" maxlength="10" pattern="[a-zA-Z0-9 ]*">
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+           <div *ngIf="title.errors.required">
+             This field is Required !!
+            </div>
+           <div *ngIf="title.errors.minlength">
+             This field should be great than 3 caracters !!
+           </div>
+           <div *ngIf="title.errors.pattern">
+              This field is not respect thie pattern!!
+            </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="product.description" name="description" rows="4" id="description" type="text" class="form-control"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input [(ngModel)]="product.quantity" id="quantity" type="text" 
+        name="quantity"
+        class="form-control">
+      </div>
+  
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input [(ngModel)]="product.price" id="price" type="text" 
+        name="price"
+        class="form-control">
+      </div>
+  
+      <div class="form-check">
+        <label for="active" class="form-check-label">
+          <input [(ngModel)]="product.active" type="checkbox" class="form-check-input" name="active" id="active">
+          Active
+        </label>
+      </div>
+  
+      <button *ngIf="f.valid" class="btn btn-block btn-warning">
+        <i class="fa fa-refresh"> Update Product</i> 
+      </button>
+  
+    </form>
+    </div>
+  </div>

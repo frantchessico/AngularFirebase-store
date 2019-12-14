@@ -1,0 +1,43 @@
+
+  <div class="row my-3">
+    <div class="col-md-11">
+      <input (keyup.enter)="serach()" [(ngModel)]="filter" name="filter" type="text" placeholder="Search a product..." class="form-control">
+    </div>
+    <div class="col-md-1 text-right">
+      <a routerLink="/products/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div (dblclick)="removeProduct(product.id)" class="col-md-4" *ngFor="let product of resultSearch; index as i">
+      <div class="card">
+        <img class="card-img-top" [src]="'https://picsum.photos/200/200?image='+i"  alt="">
+        <div class="card-body">
+          <h4 class="card-title"><a [routerLink]="['/products/show', product.id]">{{ product.title | titlecase }}</a> </h4>
+          <div class="card-text">
+             {{ product.description }}
+
+             <ul class="list-group">
+               <li class="list-group-item">Stock: {{ product.quantity | number }}</li>
+               <li class="list-group-item">Price: {{ product.price | currency }}</li>
+               <li class="list-group-item"> 
+                  <button (click)="powerProduct(product)" class="btn" [ngClass]="{
+                      'btn-success': product.active,
+                      'btn-warning': !product.active
+                }">
+                <i class="fa fa-power-off"></i> {{ product.active }}
+                </button> 
+
+                <a [routerLink]="['/products/edit/', product.id]" class="ml-2 btn btn-dark">
+
+                  <i class="fa fa-pencil"></i> Edit
+                </a>
+              </li>
+             </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
